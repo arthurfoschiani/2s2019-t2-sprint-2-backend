@@ -1,0 +1,217 @@
+{
+	"info": {
+		"_postman_id": "2f7ff460-0b8d-41b3-bfc8-70dd48270263",
+		"name": "Senai.Peoples.WebApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Funcionario.Listar",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/Funcionario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"Funcionario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Funcionario.Cadastrar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Nome\" : \"Arthur\" ,\n\t\"Sobrenome\" : \"Foschiani\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/Funcionario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"Funcionario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Funcionario.BuscarPorId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/Funcionario/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"Funcionario",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Funcionario.Alterar",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Nome\" : \"Art\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/Funcionario/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"Funcionario",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Funcionario.Deletar",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/Funcionario/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"Funcionario",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Funcionario.BuscarPorNome",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/Funcionario/buscar/Arthur",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"Funcionario",
+						"buscar",
+						"Arthur"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Funcionamento.ListarOrdenadamente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/Funcionario/ordenacao/asc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"Funcionario",
+						"ordenacao",
+						"asc"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
