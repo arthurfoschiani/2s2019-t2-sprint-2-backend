@@ -1,4 +1,5 @@
-﻿using Senai.Optus.WebApi.Domains;
+﻿using Microsoft.EntityFrameworkCore;
+using Senai.Optus.WebApi.Domains;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +56,14 @@ namespace Senai.Optus.WebApi.Repositories
                 ctx.Estilos.Update(estiloBuscado);
                 // efetivo no database
                 ctx.SaveChanges();
+            }
+        }
+
+        public Estilos BuscarArtistasAtravesDoEstilo (int id)
+        {
+            using (OptusContext ctx = new OptusContext())
+            {
+                return ctx.Estilos.Include(x => x.Artistas).FirstOrDefault(x => x.IdEstilo == id);
             }
         }
     }

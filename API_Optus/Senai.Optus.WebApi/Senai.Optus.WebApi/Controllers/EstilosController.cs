@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senai.Optus.WebApi.Domains;
@@ -16,12 +17,14 @@ namespace Senai.Optus.WebApi.Controllers
     {
         EstilosRepository estilosRepository = new EstilosRepository();
 
+        [Authorize]
         [HttpGet]
         public IActionResult Listar()
         {
             return Ok(estilosRepository.Listar());
         }
 
+        [Authorize(Roles = "ADMINISTRADOR")]
         [HttpPost]
         public IActionResult Cadastrar(Estilos estilos)
         {
@@ -36,6 +39,7 @@ namespace Senai.Optus.WebApi.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult BuscarPorId(int id)
         {
@@ -47,6 +51,7 @@ namespace Senai.Optus.WebApi.Controllers
             return Ok(estilos);
         }
 
+        [Authorize(Roles = "ADMINISTRADOR")]
         [HttpDelete("{id}")]
         public IActionResult Deletar(int id)
         {
@@ -54,6 +59,7 @@ namespace Senai.Optus.WebApi.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = "ADMINISTRADOR")]
         [HttpPut]
         public IActionResult Atualizar(Estilos estilos)
         {
@@ -71,6 +77,12 @@ namespace Senai.Optus.WebApi.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        [HttpGet("{id}/artistas")]
+        public IActionResult BuscarArtistasAtravesDoEstilo (int id)
+        {
+            return Ok(estilosRepository.BuscarArtistasAtravesDoEstilo(id));
         }
     }
 }
