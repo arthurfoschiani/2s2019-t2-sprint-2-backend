@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senai.Ekips.WebApi.Domains;
@@ -16,12 +17,14 @@ namespace Senai.Ekips.WebApi.Controllers
     {
         CargosRepository cargosRepository = new CargosRepository();
 
+        [Authorize]
         [HttpGet]
         public IEnumerable<CargosDomain> Listar()
         {
             return cargosRepository.Listar();
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Cadastrar(CargosDomain cargosDomain)
         {
@@ -29,6 +32,7 @@ namespace Senai.Ekips.WebApi.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult BuscarPorId(int id)
         {
@@ -40,6 +44,7 @@ namespace Senai.Ekips.WebApi.Controllers
             return Ok(cargos);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult Atualizar(CargosDomain cargo, int id)
         {

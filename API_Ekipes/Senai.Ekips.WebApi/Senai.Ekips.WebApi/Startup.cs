@@ -38,19 +38,19 @@ namespace Senai.Ekips.WebApi
 
                     ValidateLifetime = true,
 
-                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("gufos-chave-autenticacao")),
+                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("Ekipes-chave-autenticacao")),
 
                     ClockSkew = TimeSpan.FromMinutes(30),
 
-                    ValidIssuer = "Gufos.WebApi",
+                    ValidIssuer = "Ekipes.WebApi",
 
-                    ValidAudience = "Gufos.WebApi"
+                    ValidAudience = "Ekipes.WebApi"
                 };
             });
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "SStop API", Version = "v1" });
+                c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "Ekipes API", Version = "v1" });
             });
 
         }
@@ -68,7 +68,7 @@ namespace Senai.Ekips.WebApi
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SStop API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ekipes API V1");
             });
             app.UseMvc();
         }

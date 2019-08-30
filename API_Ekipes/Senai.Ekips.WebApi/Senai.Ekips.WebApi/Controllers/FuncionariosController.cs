@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senai.Ekips.WebApi.Domains;
@@ -16,12 +19,25 @@ namespace Senai.Ekips.WebApi.Controllers
     {
         FuncionariosRepository funcionariosRepository = new FuncionariosRepository();
 
+        [Authorize]
         [HttpGet]
-        public IEnumerable<FuncionariosDomain> Listar()
+        public IActionResult Listar()
         {
-            return funcionariosRepository.Listar();
+            string EmailBuscado = User.FindFirst(ClaimTypes.Email)?.Value;
+            string Permissao = User.FindFirst(ClaimTypes.Role)?.Value;
+            string IdRecuperado = User.FindFirst(JwtRegisteredClaimNames.Jti)?.Value;
+            int id = int.Parse(IdRecuperado);
+            if (Permissao == "ADMINISTRADOR")
+            {
+                return Ok(funcionariosRepository.Listar());
+            } else if (Permissao == "COMUM")
+            {
+                return Ok(funcionariosRepository.BuscarPorId(id));
+            }
+            return BadRequest();
         }
 
+        [Authorize(Roles = "ADMINISTRADOR")]
         [HttpPut("{id}")]
         public IActionResult Atualizar(FuncionariosDomain funcionario, int id)
         {
@@ -33,6 +49,7 @@ namespace Senai.Ekips.WebApi.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = "ADMINISTRADOR")]
         [HttpDelete("{id}")]
         public IActionResult Deletar(int id)
         {
@@ -40,6 +57,7 @@ namespace Senai.Ekips.WebApi.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = "ADMINISTRADOR")]
         [HttpPost]
         public IActionResult Cadastrar(FuncionariosDomain funcionario)
         {

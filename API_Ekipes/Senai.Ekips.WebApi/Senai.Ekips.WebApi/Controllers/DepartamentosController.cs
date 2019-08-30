@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senai.Ekips.WebApi.Domains;
@@ -19,6 +20,7 @@ namespace Senai.Ekips.WebApi.Controllers
         /// Listar Departamentos
         /// </summary>
         /// <returns>Lista de departamento</returns>
+        [Authorize]
         [HttpGet]
         public IEnumerable<DepartamentosDomain> Listar()
         {
@@ -29,6 +31,7 @@ namespace Senai.Ekips.WebApi.Controllers
         /// </summary>
         /// <param name="departamentosDomain"></param>
         /// <returns>Ok</returns>
+        [Authorize]
         [HttpPost]
         public IActionResult Cadastrar(DepartamentosDomain departamentosDomain)
         {
@@ -40,6 +43,7 @@ namespace Senai.Ekips.WebApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Departamentos com aquele Id</returns>
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult BuscarPorId(int id)
         {

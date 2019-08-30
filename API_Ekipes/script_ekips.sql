@@ -51,4 +51,4 @@ select IdDepartamento, Nome from Departamentos
 
 select IdCargo, Nome, Ativo from Cargos
 
-select f.IdFuncionario, f.Nome, f.CPF, f.DataNascimento, f.Salario, f.IdDepartamento, f.IdCargo, f.IdUsuario, u.Email, u.Senha, u.Permissao, d.Nome, c.Nome, c.Ativo from Funcionarios f inner join Usuarios u on f.IdUsuario = u.IdUsuario inner join Departamentos d on f.IdDepartamento = d.IdDepartamento inner join Cargos c on f.IdCargo = c.IdCargo
+select f.IdFuncionario, f.Nome, f.CPF, f.DataNascimento, f.Salario, f.IdDepartamento, f.IdCargo, f.IdUsuario, u.Email, u.Senha, u.Permissao, d.Nome, c.Nome, c.Ativo from Funcionarios f inner join Usuarios u on f.IdUsuario = u.IdUsuario inner join Departamentos d on f.IdDepartamento = d.IdDepartamento inner join Cargos c on f.IdCargo = c.IdCargo 
