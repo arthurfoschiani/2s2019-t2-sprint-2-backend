@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senai.AutoPecas.WebApi.Domains;
@@ -22,12 +24,15 @@ namespace Senai.AutoPecas.WebApi.Controllers
             PecasRepository = new PecasRepository();
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Listar()
         {
-            return Ok(PecasRepository.Listar());
+            int id = Convert.ToInt32(HttpContext.User.Claims.First(x => x.Type == "FornecedorId").Value);
+            return Ok(PecasRepository.BuscarPorIdFornecedor(id));
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult BuscarPorId(int id)
         {
@@ -39,6 +44,7 @@ namespace Senai.AutoPecas.WebApi.Controllers
             return Ok(pecas);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Cadastrar(Pecas pecas)
         {
@@ -53,26 +59,32 @@ namespace Senai.AutoPecas.WebApi.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult Atualizar(Pecas pecas, int id)
         {
             try
             {
+                int UsuarioId = Convert.ToInt32(HttpContext.User.Claims.First(x => x.Type == "FornecedorId").Value);
                 pecas.PecaId = id;
                 Pecas PecasBuscada = PecasRepository.BuscarPorId(pecas.PecaId);
-
                 if (PecasBuscada == null)
                     return NotFound();
 
-                PecasRepository.Atualizar(pecas);
-                return Ok();
+                if (UsuarioId == PecasBuscada.FornecedorId)
+                {
+                    PecasRepository.Atualizar(pecas);
+                    return Ok();
+                }
+                return NotFound();
             }
             catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(new { mensagem = "Ocorreu um problema: " + ex.Message });
             }
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Deletar(int id)
         {

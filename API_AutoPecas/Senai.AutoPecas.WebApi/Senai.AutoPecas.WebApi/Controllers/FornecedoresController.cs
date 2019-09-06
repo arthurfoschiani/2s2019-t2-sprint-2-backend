@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senai.AutoPecas.WebApi.Interfaces;
@@ -20,7 +21,7 @@ namespace Senai.AutoPecas.WebApi.Controllers
         {
             FornecedoresRepository = new FornecedoresRepository();
         }
-
+        
         public IActionResult Listar()
         {
             return Ok(FornecedoresRepository.Listar());

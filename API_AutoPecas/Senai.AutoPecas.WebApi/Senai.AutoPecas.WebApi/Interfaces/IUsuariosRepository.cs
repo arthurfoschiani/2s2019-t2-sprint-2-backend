@@ -10,5 +10,7 @@ namespace Senai.AutoPecas.WebApi.Interfaces
     public interface IUsuariosRepository
     {
         Usuarios BuscarPorEmailSenha(LoginViewModel login);
+        List<UsuarioViewModel> Listar();
+        void Cadastrar(Usuarios usuarios);
     }
 }

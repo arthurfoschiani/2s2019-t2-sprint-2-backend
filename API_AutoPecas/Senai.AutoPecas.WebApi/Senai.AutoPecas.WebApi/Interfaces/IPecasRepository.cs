@@ -8,7 +8,7 @@ namespace Senai.AutoPecas.WebApi.Interfaces
 {
     interface IPecasRepository
     {
-        List<Pecas> Listar();
+        List<Pecas> BuscarPorIdFornecedor(int id);
         Pecas BuscarPorId(int id);
         void Cadastrar(Pecas pecas);
         void Atualizar(Pecas pecas);

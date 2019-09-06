@@ -38,7 +38,8 @@ namespace Senai.AutoPecas.WebApi.Controllers
                 var claims = new[]
                 {
                     new Claim(JwtRegisteredClaimNames.Email, usuarioBuscado.Email),
-                    new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.UsuarioId.ToString())
+                    new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.UsuarioId.ToString()),
+                    new Claim("FornecedorId", usuarioBuscado.Fornecedores.FornecedorId.ToString())
                 };
 
                 var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("autopecas-chave-autenticacao"));
@@ -49,7 +50,7 @@ namespace Senai.AutoPecas.WebApi.Controllers
                     issuer: "AutoPecas.WebApi",
                     audience: "AutoPecas.WebApi",
                     claims: claims,
-                    expires: DateTime.Now.AddMinutes(30),
+                    expires: DateTime.Now.AddHours(1),
                     signingCredentials: creds);
 
                 return Ok(new

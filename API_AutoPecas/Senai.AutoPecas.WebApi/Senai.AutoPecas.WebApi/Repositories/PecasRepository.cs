@@ -52,11 +52,11 @@ namespace Senai.AutoPecas.WebApi.Repositories
             }
         }
 
-        public List<Pecas> Listar()
+        public List<Pecas> BuscarPorIdFornecedor(int id)
         {
             using (AutoPecasContext ctx = new AutoPecasContext())
             {
-                return ctx.Pecas.ToList();
+                return ctx.Pecas.Where(x => x.FornecedorId == id).ToList();
             }
         }
     }
